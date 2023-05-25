@@ -15,15 +15,7 @@ function getTotalAccountsCount(accounts) {
 }
 
 function getBooksBorrowedCount(books) {
-  checkedOut = 0;
-  for (let i = 0; i < books.length; i++) {
-    for (let j = 0; j < books[i].borrows.length; j++) {
-      if (!books[i].borrows[j].returned) {
-        checkedOut += 1;
-      }
-    }
-  }
-  return checkedOut;
+  return books.flatMap(book => book.borrows.filter(borrow => !borrow.returned)).length;
 }
 
 function getMostCommonGenres(books) {
